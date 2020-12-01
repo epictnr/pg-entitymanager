@@ -1,0 +1,10 @@
+# Source files
+.editorconfig
+.gitignore
+.npmrc
+.DS_Store
+.eslintrc
+jestconfig.json
+src
+tsconfig.json
+tslint.json

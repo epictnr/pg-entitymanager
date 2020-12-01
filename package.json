@@ -1,0 +1,44 @@
+{
+  "name": "@epictnr/pg-em",
+  "version": "1.2.0",
+  "description": "",
+  "main": "build/entityManager.js",
+  "types": "build/entityManager.d.ts",
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "test": "jest --config jestconfig.json --passWithNoTests",
+    "lint": "eslint 'src/**/*.ts' --color",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test && npm run lint",
+    "preversion": "npm run lint"
+  },
+  "author": "olegator8800",
+  "license": "ISC",
+  "devDependencies": {
+    "@epictnr/eslint-config-epictnr": "^1.0.0",
+    "@epictnr/tslint-config-epictnr": "^1.0.0",
+    "@types/jest": "^24.0.13",
+    "@types/object-hash": "^1.3.0",
+    "@types/pg": "^7.4.14",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.8.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "object-hash": "^1.3.1",
+    "pg": "^7.11.0"
+  }
+}

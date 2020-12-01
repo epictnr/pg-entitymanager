@@ -1,0 +1,6 @@
+{
+  "extends": "./node_modules/@epictnr/tslint-config-epictnr/index.js",
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off"
+  }
+}
