@@ -3,6 +3,8 @@ Epictnr PG-entitymanager 🐘
 
 Simple O~~R~~M (without R - relation)
 
+*(the part of micro-starter framework)*
+
 ### How to use
 
 ```js
