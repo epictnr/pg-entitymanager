@@ -3,7 +3,7 @@ Epictnr PG-entitymanager 🐘
 
 Simple O~~R~~M (without R - relation)
 
-*(the part of micro-starter framework)*
+*(the part of [micro-starter](https://github.com/epictnr/micro-starter-kit) framework)*
 
 ### How to use
 
