@@ -150,10 +150,10 @@ export class EntityManager {
 
     const entityAlias = aliasResult[2]
 
-    // replace table name and aliace
+    // replace table name and alias
     // TestEntity :te
     replaceConditions.push([`${this.entityName} :${entityAlias}`, `"${this.tableName}"`])
-    // replace aliace to all fields
+    // replace alias to all fields
     // select :te -> select field_1, field_2
     replaceConditions.push([`:${entityAlias}`, this.getFields().join(',')])
 
