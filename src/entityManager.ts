@@ -1,11 +1,17 @@
 import hash from 'object-hash'
 import { Pool, QueryResult } from 'pg'
 
+type FieldsMap = Record<string, string>
+type DBRow = Record<string, string>
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Entity {}
+
 export interface Config {
   entity: any
   tableName: string
   primaryKey: Array<string>
-  fieldsMap: object
+  fieldsMap: FieldsMap
 }
 
 export class EntityManager {
@@ -14,8 +20,8 @@ export class EntityManager {
   private entityName: string
   private tableName: string
   private primaryKey: Array<string>
-  private fieldsMap: object
-  private entityList: WeakMap<object, string>
+  private fieldsMap: FieldsMap
+  private entityList: WeakMap<Entity, string>
 
   constructor (config: Config, pool: Pool) {
     this.pool = pool
@@ -48,7 +54,7 @@ export class EntityManager {
     return this.fieldsMap[propName]
   }
 
-  fetchEntity (dbRow: object): object {
+  fetchEntity (dbRow: DBRow): Entity {
     const entity = Object.create(this.entity.prototype)
 
     for (const propName in this.fieldsMap) {
@@ -60,7 +66,7 @@ export class EntityManager {
     return entity
   }
 
-  fetchData (entity: object): Array<any> {
+  fetchData (entity: Entity): Array<any> {
     const value: Array<any> = []
 
     for (const propName in this.fieldsMap) {
@@ -70,7 +76,7 @@ export class EntityManager {
     return value
   }
 
-  async query (query: string, values: Array<any> = []): Promise<Array<object> | null> {
+  async query (query: string, values: Array<any> = []): Promise<Array<Entity> | null> {
     query = this.prepareQuery(query)
 
     const isSelectQuery = query.substring(0, 'select'.length).toLowerCase() === 'select'
@@ -85,7 +91,7 @@ export class EntityManager {
       return result.rows[0]
     }
 
-    const list: Array<object> = []
+    const list: Array<Entity> = []
 
     result.rows.forEach((row) => {
       const entity = this.fetchEntity(row)
@@ -98,7 +104,7 @@ export class EntityManager {
     return list
   }
 
-  async persist (entity: object): Promise<void> {
+  async persist (entity: Entity): Promise<void> {
     const isEntityNotChanged = this.entityList.get(entity) && this.entityList.get(entity) === hash(entity)
 
     if (isEntityNotChanged) {
